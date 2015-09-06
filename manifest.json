@@ -1,0 +1,21 @@
+{
+
+  "name": "send-image-to-kodi",
+
+  "description": "Display images from your browser on Kodi media center.",
+
+  "version": "0.2",
+
+  "permissions": ["contextMenus", "http://*/*"],
+
+  "background": {
+
+    "scripts": ["contextMenu.js"]
+
+  },
+	
+  "icons" : { "16": "icon.png" },
+
+  "manifest_version": 2
+
+}
