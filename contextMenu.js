@@ -6,7 +6,7 @@ a){var b=F.exec(a);b&&(b[1]=(b[1]||"").toLowerCase(),b[3]=b[3]&&new RegExp("(?:^
 
 function xbmcsend(jsonstring, callback){
         // Set xbmchost to your JSON-RPC API server.
-		xbmchost = "http://192.168.1.2:8080/jsonrpc";
+		var xbmchost = "http://192.168.1.2:8080/jsonrpc";
 		$.ajax({
 			data: jsonstring,
 			contentType: "application/json;charset=utf-8",
@@ -30,15 +30,20 @@ function xbmcsend(jsonstring, callback){
 
 
 function openPlayer(url) {
+
+    // Which JSON-RPC command should we send to deactivate the screensaver? Default is Input.Left
+	var wakingMethod = "Input.Left"; 
     // Give the url as a parameter for Kodi to load.
 	var requestUrl = '{"jsonrpc": "2.0", "method": "Player.Open", "params":{"item":{"file": "' + url + '"}}, "id": 2}';
     // Send a random direction on the remote to ensure the screensaver is not in use.
-	var requestDir = '{"jsonrpc": "2.0", "method": "Input.Left"}';
+	var requestDir = '{"jsonrpc": "2.0", "method": "'+ wakingMethod + '"}';
 	console.log(start);
 
     // Send JSON-RPC requests.
 	xbmcsend(requestUrl,function( unused_result ){});
 	xbmcsend(requestDir,function( unused_result ){});
+
+        console.log("Send JSON-RPC Request");
 }
 
 function sendImageURLtoXBMC(info,tab) {
